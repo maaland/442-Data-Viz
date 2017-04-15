@@ -77,9 +77,11 @@ ol { margin: 1em; }
     The dataset contains details of just under 650 000 H-1B temporary worker visa applications, on behalf of just over 1.3 million workers, where the date of the determination
     was issued on or after October 1, 2015, and on or before September 30, 2016.<br/>
     The dataset was compiled by the Department of Labor's (DOL) Office of Foreign Labor Certification division. <br/>
-    As an exchange student from Norway, this topic is of great interest to me. If I at some point after my exchange want to return to the U.S. to work, the H-1B probably the route I will have to take. <br/>
-    The H-1B visa and the application process has been under scrutiny for a while now. Every year the Department of Labor receives more applications than allotted visas, and a lottery system is utilized to determine which applications are processed. <br/>
-    In addition, many claim the visa to be broken, and exploited by consulting companies to bring in tech workers for lower pay, displacing American workers. <br/>
+    </p>
+    <p>
+    As an exchange student from Norway, this topic is of great interest to me. If I at some point after my exchange want to return to the U.S. to work, the H-1B is probably the route I will have to take. <br/>
+    The H-1B visa and the application process has been under scrutiny for a while now. Every year the Department of Labor receives more applications than there are allotted visas, and a lottery system is utilized to determine which applications are processed, and which will have to try again. <br/>
+    Many claim the visa to be broken, and exploited by large consulting companies to bring in tech workers for lower pay, displacing American workers. <br/>
     The visa was a topic of conversation during the most recent presidential election, and a bill was recently proposed by congresswoman Zoe Lofgren, suggesting a number of changes to the visa.
     I will be exploring some of the proposed changes, and look at how they would have affected 2016 applicants. <br/>
     <strong>
@@ -91,7 +93,15 @@ ol { margin: 1em; }
   <p>
     The data is available online at:
     <strong>
-      <a href="DATASET-URL-HERE">DATASET-URL-HERE</a>
+      <a href="https://www.foreignlaborcert.doleta.gov/docs/Performance_Data/Disclosure/FY15-FY16/H-1B_Disclosure_Data_FY16.xlsx">Download link (.xlsx)</a>
+    </strong>
+  </p>
+</section>
+
+<p>
+    With a description here:
+    <strong>
+      <a href="https://www.foreignlaborcert.doleta.gov/docs/Performance_Data/Disclosure/FY15-FY16/H-1B_FY16_Record_Layout.pdf">Description (.pdf)</a>
     </strong>
   </p>
 </section>
@@ -102,8 +112,7 @@ ol { margin: 1em; }
     <li>How would the changes introduced in Zoe Lofgren's recently proposed H-1B visa bill have affected 2016 decisions?</li>
     <li>More specifically: The bill proposes to more than double the wage exemption level for companies with more than 15% of their workforce in H-1B.
     How many applicants would that have affected?</li>
-    <li>Following up from that, does the prejudice that the H-1B visa is being exploited by consulting companies bringing in tech workers from below-average pay, hold true?</li>
-    <li>...</li>
+    <li>Following up from that, does the prejudice that the H-1B visa is being exploited by consulting companies bringing in tech workers for below-average pay, hold true?</li>
   </ol>
 </section>
 
@@ -113,72 +122,85 @@ ol { margin: 1em; }
   <div class="entry">
     <img src="records_vs_workers.png" />
     <p class="caption">
-    Before I begin the analysis, I want to make the distinction between number of records (applications) in the dataset, and the total number of workers. Many of the applications are filed on behalf of multiple workers, 2 on average, as seen above. Throughout this analysis I will be using the <strong>total number of workers</strong> as my measure, as people are more interesting than applications. 
+    Before I begin the analysis, I want to make the distinction between number of records (applications) in the dataset, and the total number of workers. Many of the applications are filed on behalf of multiple workers, 2 on average, as seen above. Throughout this analysis I will be using the <strong>total number of workers</strong> as my measure, because the number of <em>people</em> affected is more interesting than the number of applications affected.
     </p>
   </div>
 
   <div class="entry">
     <img src="status_dist.png" />
     <p class="caption">
-    I will start this analysis by exploring the distribution of the status of workers' applications in the dataset. The reader can see that there are 4 different decisions possible:
-    <ul>Certified: Employer filed the Labor Condition Application (LCA), which was approved by DOL</ul>
-    <ul>Certified-withdrawn: LCA was approved but later withdrawn by employer</ul>
-    <ul>Withdrawn: LCA was withdrawn by employer before approval</ul>
-    <ul>Denied: LCA was denied by DOL</ul>
+    I will start this analysis by exploring the distribution of the status of workers' applications in the dataset. There are 4 different possible statuses of applications:
+    <ul>
+      <li>Certified: Employer filed the Labor Condition Application (LCA), which was approved by DOL</li>
+      <li>Certified-withdrawn: LCA was approved but later withdrawn by employer</li>
+      <li>Withdrawn: LCA was withdrawn by employer before approval</li>
+      <li>Denied: LCA was denied by DOL</li>
+    </ul>
+
+    The vast majority, ~90% of applications in the time period in question, were certified (approved). 
     </p>
   </div>
 
   <div class="entry">
     <img src="dependent_dist.png" />
     <p class="caption">
-    An employer is considered <strong>H-1B dependent</strong> if 15% or more of its employees are on H-1B visas (assuming the company has more than 50 full-time employees.) <br/>
-    H-1B dependent employers need to include additional attestations in the application if the worker is being offered an annual compensation of less than $60 000 and withouth a Master's degree. 
+    Next I would like to introduce the concept of an employer being <strong>H-1B dependent</strong>.
+    An employer is considered H-1B dependent if 15% or more of its employees are on H-1B visas (assuming the company has more than 50 full-time employees.) <br/>
+    H-1B dependent employers need to include additional attestations in the application if the worker is being offered an annual compensation of less than a prevailing wage of $60 000 and withouth a Master's degree. 
     The bill described above proposes to raise this cap to $130 000 (and remove the Master's requirement). This is explored further below.
+
+    <p class="caption">
+    The graph above shows that the vast majority of employers in the dataset are not H-1B dependent.
+    </p>
   </div>
 
   <div class="entry">
     <img src="pw_unit_dist.png" />
     <p class="caption">
-    The dataset contains prevailing wages in different units. However, the unit of <em>yearly salary</em> is by far the one present in the most records. I will therefore, for simplicity's sake, ignore the other units. That way I don't have to deal with the assumptions involved in convertion hourly, weekly etc. pay into yearly pay. 
+    The dataset contains prevailing wages in different units. However, the unit of <em>yearly salary</em> is the one present in the most records, by a large margin. I will therefore, for simplicity's sake, exclude the datapoints using other units. That way I don't have to deal with the assumptions involved in converting hourly, weekly etc. pay into yearly pay. 
     </p>
   </div>
 
   <div class="entry">
-    <img src="pw_increase_4.png" />
+    <img src="pw_increase_5.png" />
     <p class="caption">
     The bill proposes to raise the prevailing wage exception level to 35 percentile points above the median
     for the most recent national annual wage for Computer and Mathematical Occupations as
-    published in the Department of Labor Occupational Employment Statistics, which, long story short, is at $130 000. <br/>
-    It is apparent in the above graph that this will not affect many more workers, which indicates that H-1B dependent employers are mostly paying their H-1B workers fairly, and on par with the prevailing wages in their respective fields. They are not displacing American workers, at least not because they are taking lower salaries. <br/>
-    Sadly, the dataset does not contain information about the applicants degree(s), so I was not able to assess the effect of removing the requirement of a Master's degree.
+    published in the Department of Labor Occupational Employment Statistics, which, currently, is at $130 000. <br/>
+    This only applies to H-1B dependent employers, which the data in the visualization above is filtered on. It does not mean, however, that the affected applications will be rejected. It simply means that the employer has to file additonal attestations explaining why the worker is going to be paid below the prevailing wage.
+    </p>
+
+    <p class="caption">
+    It is apparent in the above graph that raising the prevailing wage will affect many more workers, which indicates that there may be truth in the claim that H-1B dependent employers are paying their H-1B workers sub-par wages, possibly displacing American workers in the process. <br/>
+    Sadly, the dataset does not contain information about the applicants' degree(s), so I was not able to assess the effect of removing the requirement of a Master's degree.
     </p>
   </div>
 
   <div class="entry">
     <img src="top10emp3.png" />
     <p class="caption">
-    Since the visa receives so many applications each period that a lottery system has to be utilized to decide which applications to process, critique has been raised towards companies that seemingly hog visas, making it more difficult for other companies to get their application processed. Infosys and TCS(Tata Consultancy Services) are names of companies who are often mentioned in discussions about this topic.<br/>
-    The graph above shows the top 10 employers, based on number of H-1B worker applications in this dataset. Infosys and TCS are not surprisingly in the top 10, but not in the top 5. Cognizant Technology Solutions seems to be the biggest H-1B hog, as it is H-1B dependent, and is responsible for almost a quarter of all H-1B filings with determinations in the inspected time period. 
+    Since the DOL receives so many H-1B applications each period that a lottery system has to be utilized to decide which applications to process, critique has been raised towards companies that seemingly hog visas, making it more difficult for other companies to get their application processed. Infosys and TCS (Tata Consultancy Services) are names of companies often mentioned in discussions on this topic.<br/>
+    The graph above shows the top 10 employers, based on number of H-1B worker applications in this dataset. Infosys and TCS are not surprisingly in the top 10, but not in the top 5. Cognizant Technology Solutions seems to be the biggest H-1B hog, as it is H-1B dependent, and is responsible for almost a quarter of all H-1B filings in the inspected time period. 
     </p>
     <p class="caption">
     <strong>Important note</strong>
-    Two of the top 10 employers were listed as both dependent and not dependent. One was listed with only 20 workers as non-dependent, and with 17 126 as dependent, so I just excluded those 20 workers from the set. Capgemini however, was trickier. 31 676 workers were filed in an application where the employer was listed as dependent, and 12 201 in a listing with the employer as non-dependet. As the latter is roughly 1/4 of the total workers filed under this company, I kept both in the graphic. 
+    Two of the top 10 employers were listed as both dependent and not dependent. One was listed with only 20 workers as non-dependent, and with 17 126 as dependent, so I just excluded those 20 workers from the set. Capgemini however, was trickier. 31 676 workers were filed in applications where the employer was listed as dependent, and 12 201 in a listing with the employer as non-dependet. As the latter is roughly 1/4 of the total workers filed under this company, I kept both in the graphic. 
     </p>
   </div>
 
   <div class="entry">
     <img src="capgemini_2.png" />
     <p class="caption">
-    This fact made me curious, so I tried to investigate if there was a certain date where Capgemini switched from filing applications as H-1B dependent to independent, or vice versa.
-    Interestingly, there was no distinct shift, but instead a period of time between late February 2016, to late July 2016 where the employer filed both as a dependent, and independent. 
-    Also indicated in graph above is an interesting finding of two abnormally large case submittions by the company, each with over 5000 employees. 
+    The Capgemini discovery made me curious, so I tried to investigate if there was a certain date where Capgemini switched from filing applications as H-1B dependent to independent, or vice versa.
+    Interestingly, there was no distinct shift, but instead a period of time between late February 2016, to late July 2016 where the employer filed both as a dependent, and independent. I was not able to draw any certain conclusion on why the company would do this, but one explanation might be that the company is resting on the limit that decides if it is H-1B dependent or not, and oscillates between them.
+    Also indicated in graph above is an interesting finding of two abnormally large case submittions by the company, each with over 5000 employees in a single application. 
     </p>
   </div>
 
   <div class="entry">
     <img src="top_10_states_circles.png" />
     <p class="caption">
-    I thought it would be interesting to look at where these H-1B workers would be working. Unsurprisingly, California is the most popular state, with over twice the number of worker than runner-up Texas.
+    I thought it would be interesting to look at where these H-1B workers would be working. Unsurprisingly, California is the most popular state, with over twice the number of workers than runner-up Texas.
     </p>
   </div>
 
@@ -186,7 +208,9 @@ ol { margin: 1em; }
     <img src="occup_soc.png" />
     <p class="caption">
     The H-1B temporary worker visa is supposed to help the U.S. attract skilled people to fill empty jobs in specialty occupations. <br/>
-    The graph above shows the top 10 occupations of the workers in the examined dataset. The larges slices of the pie chart belong to software and computer related occupations, such as <em>software developers</em> and <em>computer programmers</em>. In fact, 5 of the top 10 occupations are related to software and/or computers. <br/>
+    The graph above shows the top 10 occupations of the workers in the examined dataset. The largest slices of the pie chart belong to software and computer related occupations, such as <em>software developers</em> and <em>computer programmers</em>. In fact, 5 of the top 10 occupations are related to software and/or computers. <br/>
+    </p>
+    <p class="caption">
     However, many of these categories are very similar. You might notice that 2 of the top 10 occupations are "Computer Systems Analyst" and "Computer Systems Analyst<strong>s</strong>". The occupation names are associated with "SOC codes", classified by the Standard Occupational Classification (SOC) System. <br/>
     One would therefore think that the occupation names would be standardized, but that is not the case at all, as shown in the next image.
     </p>
@@ -218,17 +242,15 @@ ol { margin: 1em; }
     </p>
   </div>
 
-  <div class="entry">
-    <img src="IMAGE_FILENAME" />
-    <p class="caption">
-    ENTER IMAGE CAPTION HERE.
-    </p>
-  </div>
+  
 
   <div class="entry">
     <h3>Summary</h3>
     <p>
-    WRITE FINAL SUMMARY HERE.
+    Several of the alleged problems often brought up in the discussions on the H-1B temporary worker visa, are confirmed in the visuals above. Especially the issue of H-1B workers working at H-1B dependent employers for wages lower than the (suggested) prevailing wage. The current prevailing wage has not been updated since 1998 (according to Zoe Lofgren), and updating it to a more current range is posed to have a large impact on the amount of H-1B dependent employers who will have to file additonal attestations should they desire to continue paying below the prevailing wage.
+    </p>
+    <p>
+    A second point is that H-1B dependent employers dominate the top 10 list of companies with the most H-1B workers, which might decrease the chances of smaller companies getting their applications processed. Zoe Lofgren's bill addresses this, by suggesting that 20% of the visa pool be reserved for small and startup employers (50 employees or less), but this proposal was unfortunately not possible to confirm with this dataset.
     </p>
   </div>
 </section>
