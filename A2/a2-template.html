@@ -74,9 +74,9 @@ ol { margin: 1em; }
   <h2>Dataset</h2>
 
   <p>
-    The dataset contains details of just under 700 000 H-1B temporary worker visas, where the date of the determination
+    The dataset contains details of just under 650 000 H-1B temporary worker visa applications, on behalf of just over 1.3 million workers, where the date of the determination
     was issued on or after October 1, 2015, and on or before September 30, 2016.<br/>
-    The dataset was compiled by the Department of Labor's Office of Foreign Labor Certification division. <br/>
+    The dataset was compiled by the Department of Labor's (DOL) Office of Foreign Labor Certification division. <br/>
     As an exchange student from Norway, this topic is of great interest to me. If I at some point after my exchange want to return to the U.S. to work, the H-1B probably the route I will have to take. <br/>
     The H-1B visa and the application process has been under scrutiny for a while now. Every year the Department of Labor receives more applications than allotted visas, and a lottery system is utilized to determine which applications are processed. <br/>
     In addition, many claim the visa to be broken, and exploited by consulting companies to bring in tech workers for lower pay, displacing American workers. <br/>
@@ -99,9 +99,10 @@ ol { margin: 1em; }
 <section>
   <h2>Initial Analysis Questions</h2>
   <ol>
-    <li>QUESTION_1</li>
-    <li>QUESTION_2</li>
-    <li>QUESTION_3</li>
+    <li>How would the changes introduced in Zoe Lofgren's recently proposed H-1B visa bill have affected 2016 decisions?</li>
+    <li>More specifically: The bill proposes to more than double the wage exemption level for companies with more than 15% of their workforce in H-1B.
+    How many applicants would that have affected?</li>
+    <li>Following up from that, does the prejudice that the H-1B visa is being exploited by consulting companies bringing in tech workers from below-average pay, hold true?</li>
     <li>...</li>
   </ol>
 </section>
@@ -110,9 +111,20 @@ ol { margin: 1em; }
   <h2>Discoveries &amp; Insights</h2>
 
   <div class="entry">
-    <img src="IMAGE_FILENAME" />
+    <img src="records_vs_workers.png" />
     <p class="caption">
-    DISTRIBUTION OF CERTIFICATIONS, WITHDRAWALS ETC.
+    Before I begin the analysis, I want to make the distinction between number of records (applications) in the dataset, and the total number of workers. Many of the applications are filed on behalf of multiple workers, 2 on average, as seen above. Throughout this analysis I will be using the <strong>total number of workers</strong> as my measure, as people are more interesting than applications. 
+    </p>
+  </div>
+
+  <div class="entry">
+    <img src="status_dist.png" />
+    <p class="caption">
+    I will start this analysis by exploring the distribution of the status of workers' applications in the dataset. The reader can see that there are 4 different decisions possible:
+    <ul>Certified: Employer filed the Labor Condition Application (LCA), which was approved by DOL</ul>
+    <ul>Certified-withdrawn: LCA was approved but later withdrawn by employer</ul>
+    <ul>Withdrawn: LCA was withdrawn by employer before approval</ul>
+    <ul>Denied: LCA was denied by DOL</ul>
     </p>
   </div>
 
@@ -148,10 +160,23 @@ ol { margin: 1em; }
     Since the visa receives so many applications each period that a lottery system has to be utilized to decide which applications to process, critique has been raised towards companies that seemingly hog visas, making it more difficult for other companies to get their application processed. Infosys and TCS(Tata Consultancy Services) are names of companies who are often mentioned in discussions about this topic.<br/>
     The graph above shows the top 10 employers, based on number of H-1B worker applications in this dataset. Infosys and TCS are not surprisingly in the top 10, but not in the top 5. Cognizant Technology Solutions seems to be the biggest H-1B hog, as it is H-1B dependent, and is responsible for almost a quarter of all H-1B filings with determinations in the inspected time period. 
     </p>
+    <p class="caption">
+    <strong>Important note</strong>
+    Two of the top 10 employers were listed as both dependent and not dependent. One was listed with only 20 workers as non-dependent, and with 17 126 as dependent, so I just excluded those 20 workers from the set. Capgemini however, was trickier. 31 676 workers were filed in an application where the employer was listed as dependent, and 12 201 in a listing with the employer as non-dependet. As the latter is roughly 1/4 of the total workers filed under this company, I kept both in the graphic. 
+    </p>
   </div>
 
   <div class="entry">
-    <img src="top_10_worker_states.png" />
+    <img src="capgemini_2.png" />
+    <p class="caption">
+    This fact made me curious, so I tried to investigate if there was a certain date where Capgemini switched from filing applications as H-1B dependent to independent, or vice versa.
+    Interestingly, there was no distinct shift, but instead a period of time between late February 2016, to late July 2016 where the employer filed both as a dependent, and independent. 
+    Also indicated in graph above is an interesting finding of two abnormally large case submittions by the company, each with over 5000 employees. 
+    </p>
+  </div>
+
+  <div class="entry">
+    <img src="top_10_states_circles.png" />
     <p class="caption">
     I thought it would be interesting to look at where these H-1B workers would be working. Unsurprisingly, California is the most popular state, with over twice the number of worker than runner-up Texas.
     </p>
@@ -162,21 +187,34 @@ ol { margin: 1em; }
     <p class="caption">
     The H-1B temporary worker visa is supposed to help the U.S. attract skilled people to fill empty jobs in specialty occupations. <br/>
     The graph above shows the top 10 occupations of the workers in the examined dataset. The larges slices of the pie chart belong to software and computer related occupations, such as <em>software developers</em> and <em>computer programmers</em>. In fact, 5 of the top 10 occupations are related to software and/or computers. <br/>
-    However, many of these categories are very similar. 
+    However, many of these categories are very similar. You might notice that 2 of the top 10 occupations are "Computer Systems Analyst" and "Computer Systems Analyst<strong>s</strong>". The occupation names are associated with "SOC codes", classified by the Standard Occupational Classification (SOC) System. <br/>
+    One would therefore think that the occupation names would be standardized, but that is not the case at all, as shown in the next image.
+    </p>
+
+  </div>
+
+
+  <div class="entry">
+    <img src="db.png" />
+    <p class="caption">
+    For example, several categories looked like this.
+    Therefore, to better aggregate the records and be able to examine more meaningful information about occupations, I (manually) created groups of occupation names, of various granularity.
+    Occupations with different spellings and typos, like in the image above, were grouped together as one. Closely related occupations, like <em>software developer</em> and <em>computer programmer</em> were also grouped together, as the difference between them is not really important in this analysis. 
+    Finally, I created an <em>other</em> category containing many of the weirdly specific occupations, like <em>broadcast news analysts</em>.
     </p>
   </div>
 
   <div class="entry">
     <img src="occup_narrower.png" />
     <p class="caption">
-    TOP OCCUPATION NARROWER
+    This image shows the more granular view, after wrangling the data as described above. It is still apparent, however, that a majority of the occupations are related to computers and/or software.
     </p>
   </div>
 
   <div class="entry">
     <img src="occup_binary.png" />
     <p class="caption">
-    TOP OCCUPATION BINARY
+    Condensing the data down to a binary view of <strong>computer/software related</strong> jobs and <strong>not computer/software related</strong> jobs, we see that over <strong>2/3</strong> of all H-1B visas with a determination in the inspected time period were computer/software related.
     </p>
   </div>
 
